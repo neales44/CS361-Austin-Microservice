@@ -1,0 +1,45 @@
+## Mircoservice A for Austin Christian
+
+## 1. How to REQUEST Data
+
+The mirco Sercive reads Calculator.txt and is waiting for a "Run \n" then "FGA, FGM, TPA, TPM". 
+then sleep main for 5 secs and there will be a response. 
+
+** Example (using C++ and a text file)
+```cpp
+    ofstream MyWriteFile("Calculator.txt");
+
+    MyWriteFile << "run \n";
+    MyWriteFile << fga << "," << fgm << "," << tpa << "," << tpm;
+    MyWriteFile.close();
+    sleep(10);
+```
+
+## 2. How to RECEIVE Data
+after requesting data wait a few seconds and 
+The microservice responds with a Text File Strings:
+
+
+**Example (using C++ and a text file):**
+```cpp
+    ifstream MyReadFile("Calculator.txt");
+    string myText;
+    getline (MyReadFile, myText);
+    printf("%s\n", myText.c_str());
+    MyReadFile.close();
+
+    float num = stof(myText);
+
+    printf("Effective Field Goal Percentage %.2f\n", num);
+```
+
+## 3. UML sequence diagram 
+
+
+UI             Calculator.txt       Mircoservice A
+|                    |                 |
+|  "Run \n"...       |    FGM, FGA     |
+|------------------->|------------->   |
+|       EFG          |        EFG      |
+| <----------------- |   <-------------|
+|                    |                 |
